@@ -15,6 +15,7 @@ InitialTerm is a terminal application that leverages the Ollama API to convert u
 ---
 
 # InitialTerm
+[![PyPI version](https://badge.fury.io/py/initialterm.svg)](https://badge.fury.io/py/initialterm)
 
 InitialTerm is a terminal application that uses the Ollama API to convert user queries into command-line commands. It supports both Windows and macOS operating systems.
 
@@ -31,6 +32,16 @@ Ensure you have the necessary dependencies installed. You can find them in the `
 ```bash
 pip install ollama requests
 ```
+
+## PyPI Installation
+
+InitialTerm is available on PyPI. You can install it using pip:
+
+```bash
+pip install initialterm
+```
+
+For more details, visit the [PyPI project page](https://pypi.org/project/initialterm/).
 
 ## Usage
 

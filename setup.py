@@ -13,7 +13,7 @@ setup(
     description="A human to command-line innterface tool powered by LLM models.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    # url="https://github.com/sujith/your-repo-name",  # Replace with your repo URL
+    url="https://github.com/sujithhubpost/initialterm",  # Replace with your repo URL
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
