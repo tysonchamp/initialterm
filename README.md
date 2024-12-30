@@ -75,7 +75,11 @@ After adding the alias, reload your `~/.bashrc` file to apply the changes:
 source ~/.bashrc
 ```
 
-Now open your terminal and Just type the command: `aiterminal`
+Now open your terminal and Just type the command: 
+
+```bash
+aiterminal
+```
 
 ## Contributing
 
