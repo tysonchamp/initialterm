@@ -61,6 +61,22 @@ This will start the custom command prompt where you can enter your queries. The 
 
 Type `exit` or `quit` to leave the command prompt.
 
+## For Linux Users
+
+SPecially for Ubuntu 22 and above those needs to use `python env` add below line into your `~/.bashrc` file
+
+```bash
+alias aiterminal='/home/tyson/initialterm/start.sh'
+```
+
+After adding the alias, reload your `~/.bashrc` file to apply the changes: 
+
+```bash
+source ~/.bashrc
+```
+
+Now open your terminal and Just type the command: `aiterminal`
+
 ## Contributing
 
 We welcome contributions to InitialTerm! If you'd like to contribute, please follow these guidelines:
