@@ -63,6 +63,16 @@ Type `exit` or `quit` to leave the command prompt.
 
 ## For Linux Users
 
+To install InitialTerm in editable mode, use the following command:
+
+```bash
+source .venv/bin/activate
+```
+
+```bash
+pip install -e .
+```
+
 Specially for Ubuntu 22 and above those needs to use `python env` add below line into your `~/.bashrc` file. Please modify the path to `initialterm/start.sh` based on your file location.
 
 ```bash
