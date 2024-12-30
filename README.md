@@ -63,10 +63,10 @@ Type `exit` or `quit` to leave the command prompt.
 
 ## For Linux Users
 
-SPecially for Ubuntu 22 and above those needs to use `python env` add below line into your `~/.bashrc` file
+Specially for Ubuntu 22 and above those needs to use `python env` add below line into your `~/.bashrc` file. Please modify the path to `initialterm/start.sh` based on your file location.
 
 ```bash
-alias aiterminal='/home/tyson/initialterm/start.sh'
+alias aiterminal='/PATH/TO/HOME/initialterm/start.sh'
 ```
 
 After adding the alias, reload your `~/.bashrc` file to apply the changes: 
