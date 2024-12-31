@@ -61,6 +61,36 @@ This will start the custom command prompt where you can enter your queries. The 
 
 Type `exit` or `quit` to leave the command prompt.
 
+## For Linux Users
+
+To install InitialTerm in editable mode, use the following command:
+
+```bash
+source .venv/bin/activate
+```
+
+```bash
+pip install -e .
+```
+
+Specially for Ubuntu 22 and above those needs to use `python env` add below line into your `~/.bashrc` file. Please modify the path to `initialterm/start.sh` based on your file location.
+
+```bash
+alias aiterminal='/PATH/TO/HOME/initialterm/start.sh'
+```
+
+After adding the alias, reload your `~/.bashrc` file to apply the changes: 
+
+```bash
+source ~/.bashrc
+```
+
+Now open your terminal and Just type the command: 
+
+```bash
+aiterminal
+```
+
 ## Contributing
 
 We welcome contributions to InitialTerm! If you'd like to contribute, please follow these guidelines:

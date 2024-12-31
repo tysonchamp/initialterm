@@ -126,12 +126,18 @@ def start_custom_cmd(model_name='llama3.2:3b'):
     import platform
     os_name = platform.system()
     
-    if os_name not in ['Windows', 'Darwin']:
-        logging.error("Unsupported OS. This script is designed for Windows and macOS.")
-        print("Unsupported OS. This script is designed for Windows and macOS.")
+    if os_name not in ['Windows', 'Darwin', 'Linux']:
+        logging.error("Unsupported OS. This script is designed for Windows, macOS, and Linux.")
+        print("Unsupported OS. This script is designed for Windows, macOS, and Linux.")
         return
     
-    os_name = 'MacOS' if os_name == 'Darwin' else 'Windows'
+    os_name_mapping = {
+        'Darwin': 'MacOS',
+        'Linux': 'Linux',
+        'Windows': 'Windows'
+    }
+    
+    os_name = os_name_mapping.get(os_name, 'Unsupported OS')
     
     custom_cmd(os_name, model_name)
 
