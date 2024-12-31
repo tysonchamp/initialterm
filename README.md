@@ -93,6 +93,10 @@ aiterminal
 
 ## Contributing
 
+<a href="https://github.com/sujithhubpost/initialterm/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sujithhubpost/initialterm" />
+</a>
+
 We welcome contributions to InitialTerm! If you'd like to contribute, please follow these guidelines:
 
 1. Fork the repository and create your branch from `main`.
