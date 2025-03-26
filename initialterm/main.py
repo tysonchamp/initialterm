@@ -85,6 +85,39 @@ def ollama_api_call(os_name, command, model_name, session_data):
     session_data.append({'role': 'assistant', 'content': strdata.strip().replace('`', '')})
     return strdata.strip().replace('`', '')
 
+def ollama_api_correct_error(os_name, error_message, model_name, session_data):
+    """
+    Calls the Ollama API to correct errors in the command.
+
+    Parameters:
+    os_name (str): The operating system name.
+    error_message (str): The error message to correct.
+    model_name (str): The model name to use for the API call.
+    session_data (list): The session data to include in the API call.
+
+    Returns:
+    str: The corrected command-line command.
+    """
+    logging.debug(f"Calling Ollama API to correct error with OS: {os_name}, error: {error_message}, and model: {model_name}")
+    messages = session_data + [{'role': 'user', 'content': f'I am using {os_name} operating system and encountered the following error while executing a command: {error_message}. Please provide a corrected command to resolve this error.'}]
+    stream = ollama.chat(
+        model=model_name,
+        options={'temperature': 0.1},
+        messages=messages,
+        stream=True,
+    )
+    logging.debug("Ollama API error correction call completed")
+    
+    stream_data = []
+    for chunk in stream:
+        stream_data.append(chunk['message']['content'])
+        print(f"{Color.BLUE}{chunk['message']['content']}{Color.RESET}", end='', flush=True)
+    
+    strdata = ''.join([chunk for chunk in stream_data]).replace("`", "").replace("```sh", "").replace("\n", "").replace("```bash", "")
+    print(f"\n{Color.BLUE}Finished.\nCorrected: {strdata}\n{Color.RESET}")
+    
+    session_data.append({'role': 'assistant', 'content': strdata.strip().replace('`', '')})
+    return strdata.strip().replace('`', '')
 
 def echo_and_execute(command, os_name, model_name, session_data):
     """
@@ -114,6 +147,19 @@ def echo_and_execute(command, os_name, model_name, session_data):
         if error:
             logging.error(f"Command error: {error}")
             print(f"\n{Color.RED}Error: {error}{Color.RESET}")
+            corrected_command = ollama_api_correct_error(os_name, error, model_name, session_data)
+            confirm = input(f"Corrected command is: {Color.CYAN}'{corrected_command}', shall we continue? (Y/N):{Color.RESET}# ").strip().lower()
+            if confirm.lower() in ['y', 'yes', 'yup']:
+                result = subprocess.run(corrected_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                logging.info(f"Corrected command executed: {corrected_command}")
+                output = result.stdout.decode().strip()
+                error = result.stderr.decode().strip()
+                if output:
+                    logging.debug(f"Corrected command output: {output}")
+                    print(f"\n{Color.GREEN}# Output:{Color.RESET}\n{Color.PINK}{output}{Color.RESET}")
+                if error:
+                    logging.error(f"Corrected command error: {error}")
+                    print(f"\n{Color.RED}Error: {error}{Color.RESET}")
     except Exception as e:
         logging.exception(f"An exception occurred: {e}")
         print(f"{Color.RED}An exception occurred while executing the command: {e}{Color.RESET}", file=sys.stderr)
