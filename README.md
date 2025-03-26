@@ -12,6 +12,13 @@ InitialTerm is a terminal application that leverages the Ollama API to convert u
 
 **Please ensure that you review and understand the commands before executing them to prevent any unintended consequences.**
 
+### Features
+
+- **Ollama API Integration**: Converts user queries into command-line commands using the Ollama API.
+- **Cross-Platform Support**: Works on Windows, macOS, and Linux.
+- **Session Memory**: Stores the conversation in a Session for long-term memory based on the current session.
+- **User Confirmation**: Prompts for user confirmation before executing generated commands.
+
 ---
 
 # InitialTerm
