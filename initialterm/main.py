@@ -116,7 +116,7 @@ def custom_cmd(os_name, model_name):
             break
 
 
-def start_custom_cmd(model_name='llama3.2:3b'):
+def start_custom_cmd(model_name='gemma3:4b'):
     """
     Initializes the application and starts the custom command prompt.
 
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--spawn', action='store_true')
-    parser.add_argument('--model', type=str, default='llama3.2:3b', help='Specify the model name to use')
+    parser.add_argument('--model', type=str, default='gemma3:4b', help='Specify the model name to use')
     args = parser.parse_args()
 
     if not args.spawn:
