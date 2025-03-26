@@ -6,6 +6,7 @@ import os
 import sys
 import logging
 import json
+import uuid
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, 
@@ -24,6 +25,22 @@ class Color:
     BLUE = '\033[94m'
     PINK = '\033[95m'
 
+
+def get_session_file(os_name):
+    """
+    Gets the path to the session file.
+
+    Parameters:
+    os_name (str): The operating system name.
+
+    Returns:
+    str: The path to the session file.
+    """
+    session_dir = os.path.join(os.path.expanduser("~"), ".conversation")
+    if not os.path.exists(session_dir):
+        os.makedirs(session_dir)
+    session_id = uuid.uuid4().hex
+    return os.path.join(session_dir, f"session_{os_name.lower()}_{session_id}.json")
 
 def load_session(session_file):
     """
@@ -165,18 +182,18 @@ def echo_and_execute(command, os_name, model_name, session_data):
         print(f"{Color.RED}An exception occurred while executing the command: {e}{Color.RESET}", file=sys.stderr)
 
 
-def custom_cmd(os_name, model_name, session_file):
+def custom_cmd(os_name, model_name):
     """
     Starts a custom command prompt for executing user queries.
 
     Parameters:
     os_name (str): The operating system name.
     model_name (str): The model name to use for the API call.
-    session_file (str): The path to the session file.
     """
     logging.info(f"Starting custom command prompt for {os_name} with model {model_name}")
     print(f"{Color.CYAN}Welcome to the Initial Terminal command prompt for {os_name} with model {model_name}!\n Ollama with {model_name} LLM running locally for inference\n{Color.RESET}\n Type quit/exit to exit")
 
+    session_file = get_session_file(os_name)
     session_data = load_session(session_file)
 
     while True:
@@ -221,8 +238,7 @@ def start_custom_cmd(model_name='gemma3:4b'):
     
     os_name = os_name_mapping.get(os_name, 'Unsupported OS')
     
-    session_file = f"session_{os_name.lower()}.json"
-    custom_cmd(os_name, model_name, session_file)
+    custom_cmd(os_name, model_name)
 
 
 if __name__ == "__main__":
